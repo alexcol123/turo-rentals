@@ -49,10 +49,10 @@ function ShareButton({
           <FacebookIcon size={32} round />
         </FacebookShareButton>
 
-        <LinkedinShareButton url={shareLink} title={name}>
+        <LinkedinShareButton url={shareLink} title={name}   >
           <LinkedinIcon size={32} round />
         </LinkedinShareButton>
-        <EmailShareButton url={shareLink} subject={name}>
+        <EmailShareButton url={shareLink} subject={name}  body={'look at this'} >
           <EmailIcon size={32} round />
         </EmailShareButton>
       </PopoverContent>
