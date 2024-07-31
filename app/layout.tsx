@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     url: "https://turo-rentals.vercel.app/",
     title: "TuroRentals | Find your perfect car",
     description: "Find your perfect car on Turo, the world's largest car sharing marketplace.",
+    siteName: "TuroRentals",
     images: [
       {
         url: "https://turo-rentals.vercel.app/corvette.jpg ",
