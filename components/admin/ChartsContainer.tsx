@@ -6,14 +6,14 @@ import Chart from "./Chart"
 const ChartsContainer = async () => {
 
   const bookings = await fetchChartsData()
-
+  console.log(bookings)
   if (bookings.length === 0) return (null)
 
   return (
-<>
-<Chart data={bookings} />
-pending...
-</>
+    <>
+      <Chart data={bookings} />
+
+    </>
 
   )
 }

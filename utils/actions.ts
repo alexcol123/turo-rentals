@@ -725,7 +725,7 @@ export const fetchChartsData = async () => {
 
   const bookings = await db.booking.findMany({
     where: {
-      paymentStatus: true,
+      // paymentStatus: true,
       createdAt: {
         gte: sixMonthsAgo,
       },
