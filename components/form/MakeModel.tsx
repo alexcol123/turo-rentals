@@ -8,7 +8,7 @@ import { carMakesAndModelsTypes } from "@/utils/types"
 
 
 
-const MakeModel = ({ list, defaultMake, defaultModel }: { list: carMakesAndModelsTypes[], defaultMake?: string, defaultModel: string }) => {
+const MakeModel = ({ list, defaultMake, defaultModel }: { list: carMakesAndModelsTypes[], defaultMake?: string, defaultModel?: string }) => {
 
 
   const [makeSelected, setmakeSelected] = useState('')

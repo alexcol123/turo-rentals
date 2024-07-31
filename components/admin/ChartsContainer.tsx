@@ -10,7 +10,10 @@ const ChartsContainer = async () => {
   if (bookings.length === 0) return (null)
 
   return (
-    <Chart data={bookings} />
+<>
+<Chart data={bookings} />
+pending...
+</>
 
   )
 }
