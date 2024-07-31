@@ -35,10 +35,13 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-voy Readme line 5905 
-deploy to git  and to vercell
+voy Readme line 6044
+deploy to git and to vercell
 
 TO DO
+
+-- add stripe env vars to vercel 
+-- redo all payment to master it 
 
 -- edit vehicle
 

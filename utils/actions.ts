@@ -463,6 +463,15 @@ export const createBookingAction = async (prevState: {
 }) => {
   const user = await getAuthUser()
 
+  await db.booking.deleteMany({
+    where: {
+      profileId: user.id,
+      paymentStatus: false
+    }
+  })
+
+  let bookingId: null | string = null
+
   const { vehicleId, checkIn, checkOut } = prevState
 
   const vehicle = await db.vehicle.findUnique({
@@ -485,7 +494,7 @@ export const createBookingAction = async (prevState: {
 
   try {
 
-    await db.booking.create({
+    const booking = await db.booking.create({
       data: {
         checkIn,
         checkOut,
@@ -496,11 +505,13 @@ export const createBookingAction = async (prevState: {
       }
     })
 
+    bookingId = booking.id
+
   } catch (error) {
     return renderError(error)
   }
 
-  redirect('/bookings')
+  redirect(`/checkout?bookingId=${bookingId}`);
 }
 
 
@@ -509,6 +520,7 @@ export const fetchBookings = async () => {
   const bookings = await db.booking.findMany({
     where: {
       profileId: user.id,
+      paymentStatus: true,
     },
     include: {
       Vehicle: {
@@ -560,12 +572,12 @@ export const fetchRentals = async () => {
   const rentalsWithBookingSums = await Promise.all(rentals.map(async (rental) => {
 
     const totalNightsSum = await db.booking.aggregate({
-      where: { vehicleId: rental.id },
+      where: { vehicleId: rental.id, paymentStatus: true, },
       _sum: { totalNights: true }
     })
 
     const orderTotalSum = await db.booking.aggregate({
-      where: { vehicleId: rental.id },
+      where: { vehicleId: rental.id, paymentStatus: true, },
       _sum: { orderTotal: true }
     })
 
@@ -673,6 +685,7 @@ export const fetchReservations = async () => {
 
   const reservations = await db.booking.findMany({
     where: {
+      paymentStatus: true,
       Vehicle: {
         profileId: user.id,
       },
@@ -708,7 +721,11 @@ export const fetchStats = async () => {
 
   const usersCount = await db.profile.count()
   const propertiesCount = await db.vehicle.count()
-  const bookingsCount = await db.booking.count()
+  const bookingsCount = await db.booking.count({
+    where: {
+      paymentStatus: true,
+    }
+  })
 
   return {
     usersCount,
@@ -725,7 +742,7 @@ export const fetchChartsData = async () => {
 
   const bookings = await db.booking.findMany({
     where: {
-      // paymentStatus: true,
+      paymentStatus: true,
       createdAt: {
         gte: sixMonthsAgo,
       },
@@ -734,7 +751,7 @@ export const fetchChartsData = async () => {
       createdAt: 'asc',
     },
   })
- 
+
 
   let bookingsPerMonth = bookings.reduce((total, current) => {
     const date = formatDate(current.createdAt, true)
