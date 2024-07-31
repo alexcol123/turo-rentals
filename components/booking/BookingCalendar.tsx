@@ -29,7 +29,6 @@ const BookingCalendar = () => {
 
   const unavailableDates = generateDisabledDates(blockedPeriods)
 
-  console.log(unavailableDates)
 
   useEffect(() => {
     const selectedRange = generateDateRange(range);

@@ -410,8 +410,6 @@ export const findExistingReview = async (vehicleId: string, userId: string) => {
     },
   })
 
-  console.log(review)
-
 
   return null
 }
@@ -613,7 +611,6 @@ export const updateVehicleAction = async (
 ): Promise<{ message: string }> => {
   const user = await getAuthUser()
   const vehicleId = formData.get('id') as string
-  console.log(vehicleId, 'vehicleId')
 
   try {
     const rawData = Object.fromEntries(formData)
@@ -737,7 +734,7 @@ export const fetchChartsData = async () => {
       createdAt: 'asc',
     },
   })
-  console.log(bookings)
+ 
 
   let bookingsPerMonth = bookings.reduce((total, current) => {
     const date = formatDate(current.createdAt, true)
