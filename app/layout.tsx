@@ -12,6 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "TuroRentals | Find your perfect car",
   description: "Find your perfect car on Turo, the world's largest car sharing marketplace.",
+
   openGraph: {
     type: "website",
     locale: "en_US",
