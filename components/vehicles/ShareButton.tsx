@@ -8,6 +8,8 @@ import { Button } from '../ui/button'
 import { LuShare2 } from 'react-icons/lu'
 
 import {
+  FacebookIcon,
+  FacebookShareButton,
   TwitterShareButton,
   EmailShareButton,
   LinkedinShareButton,
@@ -42,6 +44,11 @@ function ShareButton({
         <TwitterShareButton url={shareLink} title={name}>
           <TwitterIcon size={32} round />
         </TwitterShareButton>
+
+        <FacebookShareButton url={shareLink} >
+          <FacebookIcon size={32} round />
+        </FacebookShareButton>
+
         <LinkedinShareButton url={shareLink} title={name}>
           <LinkedinIcon size={32} round />
         </LinkedinShareButton>
