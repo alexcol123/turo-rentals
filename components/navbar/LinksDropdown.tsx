@@ -60,7 +60,7 @@ function LinksDropdown() {
           })}
 
           <DropdownMenuSeparator />
-          <DropdownMenuItem className='bg-primary'>
+          <DropdownMenuItem className='bg-primary text-primary-foreground'>
             <SignOutLink />
           </DropdownMenuItem>
         </SignedIn>
