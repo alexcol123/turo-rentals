@@ -14,6 +14,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import Image from 'next/image'
+import Stats from '@/components/reservations/Stats'
 
 
 
@@ -27,81 +28,87 @@ async function ReservationsPage() {
 
 
   return (
-    <div className='mt-16'>
-      <h4 className='mb-4 capitalize'>
-        total reservations : {reservations.length}
-      </h4>
-      <Table>
-        <TableCaption>A list of your recent reservations.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Image</TableHead>
-            <TableHead>Vehicle</TableHead>
+    <>
+       <Stats />
+      <div className='mt-16'>
 
-            <TableHead>Days</TableHead>
-            <TableHead>Total</TableHead>
-            <TableHead>Check In</TableHead>
-            <TableHead>Check Out</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {reservations.map((item) => {
+     
 
+        <h4 className='mb-4 capitalize'>
+          total reservations : {reservations.length}
+        </h4>
+        <Table>
+          <TableCaption>A list of your recent reservations.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Image</TableHead>
+              <TableHead>Vehicle</TableHead>
 
-
-
-            // const { id, orderTotal, totalNights, checkIn, checkOut } = item
-            // const { id: propertyId, name, country } = item.property
-
+              <TableHead>Days</TableHead>
+              <TableHead>Total</TableHead>
+              <TableHead>Check In</TableHead>
+              <TableHead>Check Out</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {reservations.map((item) => {
 
 
 
-            const { id, orderTotal, totalNights, checkIn, checkOut, paymentStatus, createdAt, updatedAt, profileId, vehicleId, } = item
+
+              // const { id, orderTotal, totalNights, checkIn, checkOut } = item
+              // const { id: propertyId, name, country } = item.property
 
 
-            let make = item?.Vehicle?.make ? item?.Vehicle?.make : ''
-            let model = item?.Vehicle?.make ? item?.Vehicle?.model : ''
-            let year = item?.Vehicle?.make ? item?.Vehicle?.year : ''
-            let image = item?.Vehicle?.make ? item?.Vehicle?.image : ''
 
 
-            //  console.log(item.Vehicle)
-            //  const name = {`${make} ${model} ${year}`}
-
-            const name = ` ${year} ${make} ${model} `
+              const { id, orderTotal, totalNights, checkIn, checkOut, paymentStatus, createdAt, updatedAt, profileId, vehicleId, } = item
 
 
-            const startDate = formatDate(checkIn)
-            const endDate = formatDate(checkOut)
+              let make = item?.Vehicle?.make ? item?.Vehicle?.make : ''
+              let model = item?.Vehicle?.make ? item?.Vehicle?.model : ''
+              let year = item?.Vehicle?.make ? item?.Vehicle?.year : ''
+              let image = item?.Vehicle?.make ? item?.Vehicle?.image : ''
 
-            return (
-              <TableRow key={id}>
 
-                <TableCell>
-                  <Link href={`/vehicles/${vehicleId}`}>
-                    <Image src={image} alt={name} width={150} height={150} className='rounded-md object-cover h-[60px] w-[100px]' />
-                  </Link>
+              //  console.log(item.Vehicle)
+              //  const name = {`${make} ${model} ${year}`}
 
-                </TableCell>
+              const name = ` ${year} ${make} ${model} `
 
-                <TableCell>
-                  <Link
-                    href={`/vehicles/${vehicleId}`}
-                    className='underline text-muted-foreground tracking-wide'>
-                    {name}
-                  </Link>
-                </TableCell>
 
-                <TableCell>{totalNights}</TableCell>
-                <TableCell>{formatCurrency(orderTotal)}</TableCell>
-                <TableCell>{startDate}</TableCell>
-                <TableCell>{endDate}</TableCell>
-              </TableRow>
-            )
-          })}
-        </TableBody>
-      </Table>
-    </div>
+              const startDate = formatDate(checkIn)
+              const endDate = formatDate(checkOut)
+
+              return (
+                <TableRow key={id}>
+
+                  <TableCell>
+                    <Link href={`/vehicles/${vehicleId}`}>
+                      <Image src={image} alt={name} width={150} height={150} className='rounded-md object-cover h-[60px] w-[100px]' />
+                    </Link>
+
+                  </TableCell>
+
+                  <TableCell>
+                    <Link
+                      href={`/vehicles/${vehicleId}`}
+                      className='underline text-muted-foreground tracking-wide'>
+                      {name}
+                    </Link>
+                  </TableCell>
+
+                  <TableCell>{totalNights}</TableCell>
+                  <TableCell>{formatCurrency(orderTotal)}</TableCell>
+                  <TableCell>{startDate}</TableCell>
+                  <TableCell>{endDate}</TableCell>
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+      </div>
+    </>
   )
 }
 export default ReservationsPage

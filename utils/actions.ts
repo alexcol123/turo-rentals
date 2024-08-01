@@ -769,29 +769,36 @@ export const fetchChartsData = async () => {
 }
 
 
-// export const fetchReservationStats = async () => {
-//   const user = await getAuthUser()
-//   const properties = await db.vehicle.count({
-//     where: {
-//       profileId: user.id,
-//     },
-//   })
+export const fetchReservationStats = async () => {
+  const user = await getAuthUser()
+  const properties = await db.vehicle.count({
+    where: {
+      profileId: user.id,
+    },
+  })
 
-//   const totals = await db.booking.aggregate({
-//     _sum: {
-//       orderTotal: true,
-//       totalNights: true,
-//     },
-//     where: {
-//       vehicleId: {
-//         profileId: user.id,
-//       },
-//     },
-//   })
+  const totals = await db.booking.aggregate({
+    _sum: {
+      orderTotal: true,
+      totalNights: true,
+    },
+    where: {
 
-//   return {
-//     properties,
-//     nights: totals._sum.totalNights || 0,
-//     amount: totals._sum.orderTotal || 0,
-//   }
-// }
+      paymentStatus: true,
+      Vehicle: {
+        profileId: user.id,
+      },
+    },
+  })
+
+  const resData = {
+    properties,
+    nights: totals._sum.totalNights || 0,
+    amount: totals._sum.orderTotal || 0,
+  }
+
+  return resData
+}
+
+
+fetchReservationStats().then(console.log).catch(console.error)
