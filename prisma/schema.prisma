@@ -12,7 +12,8 @@
 // npx prisma migrate reset
 
 // For Stripe  webhook 
-// stripe listen --forward-to localhost:3000/api/webhook
+//stripe listen --forward-to localhost:3000/api/stripe-webhook
+
 
 datasource db {
   provider  = "postgresql"

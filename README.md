@@ -40,12 +40,6 @@ deploy to git and to vercell
 
 TO DO
 
--- add stripe env vars to vercel 
--- redo all payment to master it 
-
--- edit vehicle
-
--- add map dinamyc on single car page -- README 3590 in order to do that i need to add state and county to Vehicle
--- do lazu loadin to map
-
---AFTER IM DONE WITH VEHICLE RENTAL, ADD TO SCHEMA , CITY , COUNTY AND STATE , SO THAT I CAN NAROW SEARCH BY CITY OR STATE - LIKE CHAO CHARLES DID
+-- monitor sendgrid email
+-- add payment env and sendgrid to vercell
+-- add webhook to vercell

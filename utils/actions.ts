@@ -10,6 +10,7 @@ import { uploadImage } from './supabase'
 import { EnumValues } from 'zod'
 import { calculateTotals } from './calculatTotals'
 import { formatDate } from './format'
+import { sendEmail } from './sendgrid'
 
 
 const getAuthUser = async () => {
@@ -801,4 +802,33 @@ export const fetchReservationStats = async () => {
 }
 
 
-fetchReservationStats().then(console.log).catch(console.error)
+
+
+
+
+// email actions
+export const sendEmailAction = async (emailData: {
+  totalCost: number,
+  totalNights: number,
+  email: string | null
+  name: string | null
+}) => {
+
+
+  try {
+
+    await sendEmail({
+      to: 'alexcol123456@gmail.com',
+      templateName: 'BookingSubmition',
+      dynamicTemplateData: {
+        name: emailData.name,
+        email: emailData.email,
+        message: `Your booking has been confirmed for ${emailData.totalNights} nights at a total cost of $${emailData.totalCost}`,
+      }
+    })
+
+  } catch (error) {
+    console.log(error)
+  }
+
+}

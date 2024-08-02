@@ -73,6 +73,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       ],
       mode: 'payment',
       return_url: `${origin}/api/confirm?session_id={CHECKOUT_SESSION_ID}`,
+
+
     })
 
     return Response.json({ clientSecret: session.client_secret })

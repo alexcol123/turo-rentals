@@ -51,7 +51,7 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
 import { NextResponse } from 'next/server'
 
-const isPublicRoute = createRouteMatcher(['/', '/vehicles(.*)'])
+const isPublicRoute = createRouteMatcher(['/', '/vehicles(.*)', '/api/stripe-webhook(.*)'])
 
 const isAdminRoute = createRouteMatcher(['/admin(.*)'])
 
